@@ -1,4 +1,4 @@
-# Slack QA (Question Answering) Bot
+# SlackChain AI Bot
 
 This bot allows users to ask queries and utilizes langchain to construct a vector database from website documentation or a list of GitHub projects.
 
