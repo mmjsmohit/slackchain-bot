@@ -1,27 +1,21 @@
-# Slack QA (Question answering) bot
+# Slack QA (Question Answering) Bot
 
-This is a fork of https://github.com/seratch/ChatGPT-in-Slack with additional langchain and integration with https://github.com/go-skynet/LocalAI to run completely locally, without need of any OpenAI account.
-
-The bot allows to ask queries and uses langchain to build a vector database from a website documentation, or a list of Github projects.
-
-![Kairos-TPM-Slackbot](https://github.com/spectrocloud-labs/Slack-QA-bot/assets/2420543/6047e1ff-22d5-4b03-9d73-fcb7fb19a2c1)
+This bot allows users to ask queries and utilizes langchain to construct a vector database from website documentation or a list of GitHub projects.
 
 ## How It Works
 
-You have to start a new thread by mentioning the bot: @<bot name> What's ...?
+To initiate a new thread, mention the bot: `@<bot name> What's ...?`
 
-![Kairos-TPM-Slackbot](https://github.com/spectrocloud-labs/Slack-QA-bot/assets/2420543/6047e1ff-22d5-4b03-9d73-fcb7fb19a2c1)
+Note: It _does not_ respond to mentions intentionally to avoid sending large context back to the LLM, which would slow down performance when running entirely on CPU.
 
-Note: It _does not_ reply to mentions. That was done in purpose to avoid to send big context back to the LLM, which makes it slow when running entirely on CPU.
+## Setting Up and Running the App Locally
 
-## Running the App on Your Local Machine
+To run this application on your local machine, follow these simple steps:
 
-To run this app on your local machine, you only need to follow these simple steps:
-
-* Create a new Slack app using the manifest-dev.yml file
-* Install the app into your Slack workspace
-* Retrieve your OpenAI API key at https://platform.openai.com/account/api-keys
-* Start the app
+1. Create a new Slack app using the `manifest-dev.yml` file.
+2. Install the app into your Slack workspace.
+3. Retrieve your OpenAI API key at [OpenAI API Keys](https://platform.openai.com/account/api-keys).
+4. Start the app.
 
 ```bash
 # Create an app-level token with connections:write scope
@@ -35,7 +29,6 @@ export OPENAI_API_KEY=sk-...
 export OPENAI_MODEL=gpt-4
 # Optional: You can adjust the timeout seconds for OpenAI calls (default: 30)
 export OPENAI_TIMEOUT_SECONDS=60
-
 
 export MEMORY_DIR=/tmp/memory_dir
 
@@ -67,22 +60,21 @@ python main.py
 
 ## Running the App for Company Workspaces
 
-Confidentiality of information is top priority for businesses.
+Maintaining confidentiality of information is crucial for businesses.
 
-This app is open-sourced! so please feel free to fork it and deploy the app onto the infrastructure that you manage.
-After going through the above local development process, you can deploy the app using `Dockerfile`, which is placed at the root directory of this project.
+As this app is open-source, feel free to fork it and deploy the app onto your own infrastructure.
+After completing the local development process outlined above, deploy the app using the Dockerfile located in the root directory of this project.
 
-The `Dockerfile` is designed to establish a WebSocket connection with Slack via Socket Mode.
-This means that there's no need to provide a public URL for communication with Slack.
+The Dockerfile facilitates establishing a WebSocket connection with Slack via Socket Mode, eliminating the need for providing a public URL for communication with Slack.
 
 ## Contributions
 
-You're always welcome to contribute! :raised_hands:
-When you make changes to the code in this project, please keep these points in mind:
-- When making changes to the app, please avoid anything that could cause breaking behavior. If such changes are absolutely necessary due to critical reasons, like security issues, please start a discussion in GitHub Issues before making significant alterations.
-- When you have the chance, please write some unit tests. Especially when you touch `internals.py` and add/edit the code that do not call any web APIs, writing tests should be relatively easy.
-- Before committing your changes, be sure to run `./validate.sh`. The script runs black (code formatter), flake8 and pytype (static code analyzers).
+Contributions are always welcome! 🙌
 
-## The License
+When making changes to the code in this project, please adhere to the following guidelines:
 
-The MIT License
+Avoid changes that could cause breaking behavior. If such changes are necessary due to critical reasons, such as security issues, initiate a discussion in GitHub Issues before making significant alterations.
+Whenever possible, include unit tests, especially when modifying internals.py or adding/editing code that doesn't call any web APIs. Writing tests should be relatively straightforward.
+Before committing changes, run ./validate.sh, which executes black (code formatter), flake8, and pytype (static code analyzers).
+License
+This project is licensed under the MIT License.
